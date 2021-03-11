@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MemberRoleSeeder::class,
             serviceGradeSeeder::class,
+            PersonalDataTypeSeeder::class,
         ]);
     }
 }

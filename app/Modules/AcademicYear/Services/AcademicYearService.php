@@ -50,6 +50,14 @@ class AcademicYearService{
         }
     }
 
+    public function listEnabledAcademicYear(){
+        try{
+            return $this->academicYearRepo->listEnabledAcademicYear();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
 
 
 

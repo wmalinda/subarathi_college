@@ -78,6 +78,15 @@ class AcademicYearContrtoller extends Controller{
     }
         
     public function status(Request $request){
+
+    }
+
+    public function getEnabledList(Request $ewquest){
+        try{
+            return $this->academicYearService->listEnabledAcademicYear();
+        }catch(\Exception $e){
+            throw $e;
+        }
     }
     
 }

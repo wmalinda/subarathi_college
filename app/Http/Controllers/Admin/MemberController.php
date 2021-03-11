@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Modules\Member\Services\MemberService;
 use App\Modules\Grade\Services\GradeService;
+use App\Modules\AcademicYear\Services\AcademicYearService;
 use App\Modules\Member\Models\Member;
 use App\Modules\Member\Models\MemberDetail;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,7 @@ class MemberController extends Controller{
         $this->middleware('auth');
         $this->memberService = new MemberService();
         $this->gradeService = new GradeService();
+        $this->academicYearService = new AcademicYearService();
     }
 
     public function index(){
@@ -202,10 +204,33 @@ class MemberController extends Controller{
     }
     
     public function view(Request $request, $id) {
-        $data['memberData'] = $this->memberService->getmemberData($id);
+        $memberData = $this->memberService->getmemberData($id);
+        $data['memberData'] = $memberData[0];
+        $data['getPersonalDataType'] = $this->memberService->getPersonalDataType();
+        $data['getPersonalData'] = $this->memberService->getPersonalData($id);
+        //$data['getacademicYear'] = $this->academicYearService->listEnabledAcademicYear();
+        //dd($data);
         $data['title'] = 'Member Management';
         $data['slug'] = 'view-member';
         $data['sub_page'] = 'View Member';
         return view('admin.member.view', $data);
+    }
+
+    public function memberpersonalDataStore(Request $request, $id){
+        try{
+            $memberpersonalDataStore = $this->memberService->memberpersonalDataStore($request, $id);
+            return redirect()->route('member-view', [$id]);
+            //return redirect()->route('member-view');
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
+    public function memberDataStore(Request $request, $id){
+        try{
+            return $this->memberService->memberDataStore($request, $id);
+        }catch(\Exception $e){
+            throw $e;
+        }
     }
 }

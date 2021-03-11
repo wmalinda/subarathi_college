@@ -46,13 +46,6 @@
   {{-- <link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" /> --}}
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   {{-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> --}}
-
-  <script>
-    //var base_url = '{{ env('SITE_BASE_URL') }}';
-    //var admin_url = '{{ env('SITE_ADMIN_URL') }}';
-    // var app_url = '{{url('/')}}'
-    // var app_admin_url = '{{url('admin')}}'
-  </script>
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -149,11 +142,16 @@
 {{-- <script src="https://vjs.zencdn.net/7.8.2/video.js"></script> --}}
 
 <script>
-// window.socketURL = "{{env('SOCKET.IO_URL')}}";
-// window.stunURL = "{{env('STUN_URL')}}";
-// window.turnURL = "{{env('TURN_URL')}}";
-// window.turnUsername = "{{env('TURN_USERNAME')}}";
-// window.turnPassword = "{{env('TURN_PASSWORD')}}";
+  var base_url = '{{ env('SITE_BASE_URL') }}';
+  var admin_url = '{{ env('SITE_ADMIN_URL') }}';
+  // var app_url = '{{url('/')}}'
+  // var app_admin_url = '{{url('admin')}}'
+    
+  // window.socketURL = "{{env('SOCKET.IO_URL')}}";
+  // window.stunURL = "{{env('STUN_URL')}}";
+  // window.turnURL = "{{env('TURN_URL')}}";
+  // window.turnUsername = "{{env('TURN_USERNAME')}}";
+  // window.turnPassword = "{{env('TURN_PASSWORD')}}";
 </script>
 @yield('js')
 </body>

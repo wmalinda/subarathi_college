@@ -44,4 +44,12 @@ class ClassesService{
             throw $e;
         }
     }
+
+    public function getEnabledClassesByGradeId($id){
+        try{
+            return $this->classesRepo->getEnabledClassesByGradeId($id);
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 }

@@ -44,6 +44,14 @@ class AcademicYearRepository{
         }
     }
 
+    public function listEnabledAcademicYear(){
+        try{
+            return $this->model->where('status', 1)->orderby('id', 'DESC')->get();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
     /*public function findChannelById(int $id){
         try {
             return $this->model->find($id);

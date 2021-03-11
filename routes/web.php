@@ -44,6 +44,8 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/admin/member/{id}/delete', 'Admin\MemberController@destroy')->name('member-delete');
     Route::post('/admin/member/status-change', 'Admin\MemberController@status')->name('member-status');
     Route::get('/admin/member/{id}/view', 'Admin\MemberController@view')->name('member-view');
+    Route::post('/admin/member-personal-data/{id}/store', 'Admin\MemberController@memberpersonalDataStore')->name('member-personal-data-store');
+    Route::post('/admin/member-data/{id}/store', 'Admin\MemberController@memberDataStore')->name('member-data-store');
 
     Route::get('/admin/grade/index', 'Admin\GradeController@index')->name('grade-index');
     Route::get('/admin/grade/list', 'Admin\GradeController@data')->name('grade-list');
@@ -80,4 +82,10 @@ Route::middleware('auth:web')->group(function () {
     Route::post('/admin/academic-year/{id}/update', 'Admin\AcademicYearContrtoller@update')->name('academic-year-update');
     Route::get('/admin/academic-year/{id}/delete', 'Admin\AcademicYearContrtoller@destroy')->name('academic-year-delete');
     Route::post('/admin/academic-year/status-change', 'Admin\AcademicYearContrtoller@status')->name('academic-year-status');
+    Route::get('/admin/academic-year/enabled-list', 'Admin\AcademicYearContrtoller@getEnabledList')->name('enabled-academic-year-list');
+
+    Route::post('/admin/get-enabled-academic-year', 'Admin\AjaxController@getEnabledAcademicYears')->name('get-enabled-academic-year');
+    Route::post('/admin/get-enabled-grades', 'Admin\AjaxController@getEnabledGrades')->name('get-enabled-grades');
+    Route::post('/admin/get-enabled-classes-by-grade-id', 'Admin\AjaxController@getEnabledClassesByGradeId')->name('get-enabled-classes-by-grade-id');
+    Route::post('/admin/get-enabled-subjects', 'Admin\AjaxController@getEnabledSubjects')->name('get-enabled-subjects');
 });

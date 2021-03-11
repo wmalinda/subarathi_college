@@ -42,4 +42,12 @@ class SubjectService{
             throw $e;
         }
     }
+
+    public function getEnabledSubjects(){
+        try{
+            return $this->subjectRepo->getEnabledSubjects();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 }

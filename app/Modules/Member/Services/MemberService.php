@@ -91,5 +91,57 @@ class MemberService{
         }
     }
 
-    
+    public function getPersonalDataType(){
+        try{
+            return $this->memberRepo->getPersonalDataType();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
+    public function memberpersonalDataStore($request, $id){
+        try{
+            $data = $request->request->all();
+            $memberData['member_id'] = (isset($id)) ? $id : '';
+            $memberData['type_id'] = (isset($data['type'])) ? $data['type'] : '';
+            $memberData['title'] = (isset($data['title'])) ? $data['title'] : '';
+            $memberData['description'] = (isset($data['description'])) ? $data['description'] : '';
+            $memberData['status'] = (isset($data['status'])) ? 1 : 0;
+            return $this->memberRepo->memberpersonalDataStore($memberData);
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
+    public function getPersonalData($id){
+        try{
+            $returnData = [];
+            $getPersonalData = $this->memberRepo->getPersonalData($id);
+            //dd($getPersonalData);
+            if($getPersonalData){
+                foreach($getPersonalData as $personalData){
+                    $returnData[$personalData['type_id']][] = $personalData;
+                }
+            }
+
+            return $returnData;
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
+
+    public function memberDataStore($request, $id){
+        try{
+            dd($request, $id);
+            $data = $request->request->all();
+            $memberData['member_id'] = (isset($id)) ? $id : '';
+            $memberData['type_id'] = (isset($data['type'])) ? $data['type'] : '';
+            $memberData['title'] = (isset($data['title'])) ? $data['title'] : '';
+            $memberData['description'] = (isset($data['description'])) ? $data['description'] : '';
+            $memberData['status'] = (isset($data['status'])) ? 1 : 0;
+            return $this->memberRepo->memberDataStore();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 }

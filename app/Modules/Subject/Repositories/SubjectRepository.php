@@ -40,4 +40,12 @@ class SubjectRepository{
             return new EventEditErrorException();
         }
     }
+
+    public function getEnabledSubjects(){
+        try{
+            return $this->model->where('status', '=', 1)->get();
+        }catch(\Exception $e){
+            throw $e;
+        }
+    }
 }

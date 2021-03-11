@@ -5,6 +5,8 @@ namespace App\Modules\Member\Repositories;
 use App\Modules\Member\Models\Member;
 use App\Modules\Member\Models\MemberDetail;
 use App\Modules\Member\Models\MemberRole;
+use App\Modules\Member\Models\PersonalDataType;
+use App\Modules\Member\Models\PersonalData;
 use App\Modules\Grade\Models\ServiceGrade;
 use App\Exceptions\BaseException;
 use Illuminate\Http\Request;
@@ -15,11 +17,15 @@ class MemberRepository{
     private $model;
     private $memberDetailmodel;
     private $memberRolemodel;
+    private $personalDataTypeModel;
+    private $personalDataModel;
 
     public function __construct(){
         $this->model = new Member();
         $this->memberDetailmodel = new MemberDetail();
         $this->memberRolemodel = new MemberRole();
+        $this->personalDataTypeModel = new PersonalDataType();
+        $this->personalDataModel = new PersonalData();
     }
 
     public function createMember($data){
@@ -92,4 +98,39 @@ class MemberRepository{
         }
     }
     
+    public function getPersonalDataType(){
+        try {
+            return $this->personalDataTypeModel->get();
+        } catch (\Exception $e) {
+            dd($e);
+            throw $e->getMessage();
+        }
+    }
+
+    public function memberpersonalDataStore($data){
+        try {
+            return $this->personalDataModel->create($data);
+        } catch (\Exception $e) {
+            throw $e->getMessage();
+        }
+    }
+
+    public function getPersonalData($id){
+        try {
+            return PersonalData::with('PersonalDataType')->where(['member_id' => $id, 'status' => 1])->get();
+            //return $this->personalDataModel->where(['member_id' => $id, 'status' => 1])->get();
+        } catch (\Exception $e) {
+            dd($e);
+            throw $e->getMessage();
+        }
+    }
+
+    public function memberDataStore($data){
+        try {
+            dd($data, 'ggg');
+            return $this->personalDataModel->create($data);
+        } catch (\Exception $e) {
+            throw $e->getMessage();
+        }
+    }
 }

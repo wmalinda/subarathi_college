@@ -40,4 +40,12 @@ class ClassesRepository{
             return new EventEditErrorException();
         }
     }
+
+    public function getEnabledClassesByGradeId(int $id){
+        try {
+            return $this->model->where('grade_id', $id)->where('status', 1)->get();
+        } catch (\Exception $e) {
+            throw $e->getMessage();
+        }
+    }
 }
