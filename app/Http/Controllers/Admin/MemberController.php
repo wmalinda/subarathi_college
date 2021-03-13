@@ -185,14 +185,25 @@ class MemberController extends Controller{
     }
 
     public function edit($id){
+        $memberData = $this->memberService->getmemberData($id);
+        $data['memberData'] = $memberData[0];
+        $data['memberRoles'] = $this->memberService->getEnabledMemberRoles();
+        $data['serviceGrades'] = $this->gradeService->getEnabledServiceGrades();
+        $data['grades'] = $this->gradeService->getEnabledGrades();
         $data['title'] = 'Member Management';
         $data['slug'] = 'edit-member';
         $data['sub_page'] = 'Edit Member';
+        //dd($data);
         return view('admin.member.edit', $data);
     }
 
-    public function update(EventUpdateRequest $request, $id) {
-        
+    public function update(Request $request, $id) {
+        $member = $this->memberService->updateMember($request, $id);
+        if($member == true){
+            return redirect('/admin/member/index')->with('success', 'Member data successfully updated.');
+        }else{
+            return redirect('/admin/member/index')->with('error', 'Member updating error.');
+        }
     }
         
     public function destroy($id){

@@ -65,7 +65,7 @@ class MemberRepository{
 
     public function getMemberDetailByMemberId(int $id){
         try {
-            return $this->memberDetailmodel->find($id);
+            return $this->memberDetailmodel->where('member_id', $id)->first();
         } catch (\Exception $e) {
             throw $e->getMessage();
         }
