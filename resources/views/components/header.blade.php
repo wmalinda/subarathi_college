@@ -12,8 +12,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <button class="close-toggler" type="button" data-toggle="offcanvas"> <span><i class="fas fa-times-circle" aria-hidden="true"></i></span> </button>
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item"> <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a> </li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('about') }}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Classes</a> <i class="fas fa-caret-down"></i>
                   <ul class="submenu">
                     <li><a href="#">Classes</a></li>
